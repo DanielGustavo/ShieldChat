@@ -1,0 +1,103 @@
+section.chat-room {
+  width: 100vw;
+  height: 100vh;
+  display: grid;
+  grid-template-areas: 'users-list chat chat chat';
+}
+
+section.chat-room aside {
+  height: 100%;
+  grid-area: users-list;
+  border-right: 2px solid #9c9c9c;
+  padding: 5px;
+  background: #fff;
+}
+
+ul.users {
+  list-style: none;
+  max-height: 90%;
+  overflow: auto;
+}
+
+ul.users li {
+  background: #3564bc;
+  color: #fff;
+  font-weight: bold;
+  padding: 5px;
+  border-radius: 5px;
+  margin-bottom: 5px;
+}
+
+ul.users li.owner {
+  background: #8bd21f;
+}
+
+section.chat-room div.chat {
+  grid-area: chat;
+  height: 100%;
+  overflow: hidden;
+}
+
+div.chat div.wrapper {
+  padding: 5px;
+  height: 90%;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+}
+
+section.messages {
+  height: 100%;
+  width: 98%;
+  overflow-y: auto;
+  background: #fff;
+}
+
+section.messages div {
+  background: #645f5f;
+  color: #fff;
+  padding: 5px;
+  border-radius: 10px 10px 10px 0;
+  max-width: 300px;
+  margin-bottom: 5px;
+  margin-left: 0;
+}
+
+section.messages div.owner {
+  background: #8bd21f;
+  margin-left: auto;
+}
+
+section.messages div p {
+  font-size: 15px;
+}
+
+section.messages div span {
+  margin-bottom: 5px;
+  display: block;
+  font-weight: bold;
+}
+
+form.chat-form {
+  position: fixed;
+  display: flex;
+  align-self: center;
+  width: 50%;
+  bottom: 0;
+}
+
+form.chat-form button, input {
+  border: 1px solid black;
+  padding: 20px;
+}
+
+form.chat-form input {
+  flex: 1;
+  border-radius: 5px 0 0 5px;
+  padding-left: 15px;
+}
+
+form.chat-form button {
+  width: 80px;
+  border-radius: 0 5px 5px 0;
+}

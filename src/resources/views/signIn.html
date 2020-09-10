@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>SignIn</title>
+  <link rel="stylesheet" href="css/global.css">
+  <link rel="stylesheet" href="css/formPage.css">
+  <script>
+    const token = localStorage.getItem('GitChat:token');
+
+    if (token) {
+      window.location =  '/';
+    }
+  </script>
+</head>
+<body>
+  <form>
+    <div class="error-box hidden"><small></small></div>
+    <input name="username" placeholder="username" required>
+    <input type="password" name="password" placeholder="password" required>
+    <button>SignIn</button>
+
+    <a href="/signUp"><small>Don't have an account? Sign up!</small></a>
+  </form>
+
+  <script src="js/errorBox.js"></script>
+  <script>
+    const form = document.querySelector('form');
+
+    function login({ username, token }) {
+      localStorage.setItem('GitChat:username', username);
+      localStorage.setItem('GitChat:token', token);
+      window.location = '/';
+    }
+
+    form.addEventListener('submit', async (event) => {
+      event.preventDefault();
+
+      const inputsvalues = {
+        username: form.querySelector('input[name=username]').value,
+        password: form.querySelector('input[name=password]').value,
+      }
+
+      const fetchInit = {
+        method: 'POST',
+        body: JSON.stringify(inputsvalues),
+        headers: { 'content-type': 'application/json' }
+      }
+
+      const response = fetch('authentication', fetchInit)
+        .then(async (response) => {
+          const data = await response.json();
+
+          if (!response.ok) {
+            throw new Error(data.error);
+          }
+
+          const { token, user } = data;
+          login({ username: user.username, token });
+        })
+        .catch(error => {
+          displayError(error.message);
+        });
+    });
+  </script>
+</body>
+</html>

@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>SignUp</title>
+  <link rel="stylesheet" href="css/global.css">
+  <link rel="stylesheet" href="css/formPage.css">
+  <script>
+    const token = localStorage.getItem('GitChat:token');
+
+    if (token) {
+      window.location =  '/';
+    }
+  </script>
+</head>
+<body>
+  <form>
+    <div class="error-box hidden"><small></small></div>
+    <input minlength="5" name="username" placeholder="username" required>
+    <input minlength="10" type="password" name="password" placeholder="password" required>
+    <input
+      minlength="10"
+      type="password"
+      name="password_confirmation"
+      placeholder="password confirmation"
+      required
+    >
+    <button>SignUp</button>
+
+    <a href="/signIn"><small>Return</small></a>
+  </form>
+
+  <script src="js/errorBox.js"></script>
+  <script>
+    const form = document.querySelector('form');
+
+    form.addEventListener('submit', async (event) => {
+      event.preventDefault();
+
+      const inputsvalues = {
+        username: form.querySelector('input[name=username]').value,
+        password: form.querySelector('input[name=password]').value,
+        password_confirmation: form.querySelector('input[name=password_confirmation]').value,
+      }
+
+      const fetchInit = {
+        method: 'POST',
+        body: JSON.stringify(inputsvalues),
+        headers: { 'content-type': 'application/json' }
+      }
+
+      fetch('users', fetchInit)
+        .then(async (response) => {
+          const data = await response.json();
+
+          if (!response.ok) {
+            throw new Error(data.error);
+          }
+
+          window.location = '/';
+        })
+        .catch(error => {
+          displayError(error.message);
+        });
+    });
+  </script>
+</body>
+</html>
