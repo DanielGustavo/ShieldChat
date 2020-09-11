@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 
 import { Container, Background, Content } from './styles';
 import { Button, Input } from '../../styles';
@@ -21,7 +22,11 @@ const SignIn: React.FC = () => {
           <span>
             <small>or</small>
           </span>
-          <Button filled={false}>Sign up</Button>
+          <Link to="signup">
+            <Button type="button" filled={false}>
+              Sign up
+            </Button>
+          </Link>
         </form>
       </Content>
       <Background />

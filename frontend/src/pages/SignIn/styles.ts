@@ -57,6 +57,12 @@ export const Content = styled.div`
         margin-top: 8px;
       }
     }
+
+    a {
+      button {
+        width: 100%;
+      }
+    }
   }
 `;
 

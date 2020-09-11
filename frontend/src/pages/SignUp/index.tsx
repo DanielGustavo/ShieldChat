@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import { FiArrowLeft } from 'react-icons/fi';
 
 import { Container, Background, Content } from './styles';
@@ -26,10 +27,10 @@ const SignUp: React.FC = () => {
           </div>
 
           <Button>Sign up</Button>
-          <a href="/">
+          <Link to="/">
             <FiArrowLeft />
             <small>return</small>
-          </a>
+          </Link>
         </form>
       </Content>
     </Container>
