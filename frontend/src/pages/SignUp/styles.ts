@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 
-import signInBackground from '../../assets/signInBackground.png';
+import signInBackground from '../../assets/signUpBackground.png';
 
 export const Container = styled.div`
   width: 100vw;
@@ -24,28 +24,16 @@ export const Content = styled.div`
     flex-direction: column;
     width: 300px;
 
-    span {
-      text-align: center;
-      margin: 8px 0;
-      color: #c9c9c9;
+    a {
+      margin-top: 5px;
+      text-decoration: none;
+      color: var(--color-white);
       display: flex;
       align-items: center;
-      justify-content: space-between;
+      justify-content: center;
 
-      &:before {
-        content: '';
-        background: #c9c9c9;
-        height: 1px;
-        display: block;
-        width: 40%;
-      }
-
-      &:after {
-        content: '';
-        background: #c9c9c9;
-        height: 1px;
-        display: block;
-        width: 40%;
+      small {
+        margin-bottom: 2px;
       }
     }
 
@@ -61,7 +49,7 @@ export const Content = styled.div`
 `;
 
 export const Background = styled.div`
-  background: url(${signInBackground}) no-repeat left;
+  background: url(${signInBackground}) no-repeat right;
   background-size: cover;
   flex: 1;
 `;

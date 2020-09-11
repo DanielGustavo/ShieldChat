@@ -25,7 +25,8 @@
       "prettier/prettier": "error",
       "import/extensions": ["error", { "extensions": [".ts", ".tsx"] }],
       "react/jsx-filename-extension": [1, { "extensions": [".tsx"] }],
-      "no-use-before-define": "off"
+      "no-use-before-define": "off",
+      "import/prefer-default-export": "off"
     },
     "settings": {
       "import/resolver": {

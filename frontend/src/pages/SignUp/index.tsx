@@ -1,13 +1,16 @@
 import React from 'react';
+import { FiArrowLeft } from 'react-icons/fi';
 
 import { Container, Background, Content } from './styles';
 import { Button, Input } from '../../styles';
 
 import logo from '../../assets/logo.svg';
 
-const SignIn: React.FC = () => {
+const SignUp: React.FC = () => {
   return (
     <Container>
+      <Background />
+
       <Content>
         <img src={logo} alt="ShieldChat logo" />
 
@@ -15,18 +18,22 @@ const SignIn: React.FC = () => {
           <div>
             <Input placeholder="username" required />
             <Input placeholder="password" type="password" required />
+            <Input
+              placeholder="password confirmation"
+              type="password"
+              required
+            />
           </div>
 
-          <Button>Login</Button>
-          <span>
-            <small>or</small>
-          </span>
-          <Button filled={false}>Sign up</Button>
+          <Button>Sign up</Button>
+          <a href="/">
+            <FiArrowLeft />
+            <small>return</small>
+          </a>
         </form>
       </Content>
-      <Background />
     </Container>
   );
 };
 
-export default SignIn;
+export default SignUp;
