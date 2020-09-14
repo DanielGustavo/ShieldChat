@@ -49,20 +49,20 @@ export const Content = styled.div`
       }
     }
 
-    div {
-      width: 100%;
-      margin-bottom: 40px;
-
-      input + input {
-        margin-top: 8px;
-      }
-    }
-
     a {
       button {
         width: 100%;
       }
     }
+  }
+`;
+
+export const Inputs = styled.div`
+  width: 100%;
+  margin-bottom: 40px;
+
+  div + div {
+    margin-top: 8px;
   }
 `;
 

@@ -5,19 +5,6 @@ interface ButtonProps {
   filled?: boolean;
 }
 
-export const Input = styled.input`
-  &::placeholder {
-    color: #c9c9c9;
-  }
-
-  width: 100%;
-  border: var(--color-white) solid 2px;
-  border-radius: 5px;
-  padding: 14px 10px;
-  background: none;
-  color: var(--color-white);
-`;
-
 export const Button = styled.button<ButtonProps>`
   background: ${({ filled = true }) => {
     return filled ? css`var(--color-white)` : css`none`;

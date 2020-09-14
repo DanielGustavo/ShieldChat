@@ -36,15 +36,15 @@ export const Content = styled.div`
         margin-bottom: 2px;
       }
     }
+  }
+`;
 
-    div {
-      width: 100%;
-      margin-bottom: 40px;
+export const Inputs = styled.div`
+  width: 100%;
+  margin-bottom: 40px;
 
-      input + input {
-        margin-top: 8px;
-      }
-    }
+  div + div {
+    margin-top: 8px;
   }
 `;
 

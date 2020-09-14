@@ -19,14 +19,20 @@
     "plugins": [
         "react",
         "@typescript-eslint",
-        "prettier"
+        "prettier",
+        "react-hooks"
     ],
     "rules": {
       "prettier/prettier": "error",
       "import/extensions": ["error", { "extensions": [".ts", ".tsx"] }],
       "react/jsx-filename-extension": [1, { "extensions": [".tsx"] }],
       "no-use-before-define": "off",
-      "import/prefer-default-export": "off"
+      "import/prefer-default-export": "off",
+      "react/jsx-props-no-spreading": "off",
+      "react-hooks/exhaustive-deps": "error",
+      "react/prop-types": "off",
+      "no-unused-expressions": "off",
+      "camelcase": "off"
     },
     "settings": {
       "import/resolver": {
