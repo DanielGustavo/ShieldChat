@@ -1,4 +1,10 @@
-import React, { createContext, useCallback, useContext, useState } from 'react';
+import React, {
+  createContext,
+  useCallback,
+  useContext,
+  useState,
+  useEffect,
+} from 'react';
 
 import api from '../services/api';
 
@@ -23,6 +29,7 @@ interface AuthProps {
   signUp: (credentials: SignUpProps) => Promise<void>;
   token: string;
   user: User;
+  authenticated: boolean;
 }
 
 interface AuthData {
@@ -47,6 +54,13 @@ export const AuthProvider: React.FC = ({ children }) => {
 
     return {} as AuthData;
   });
+  const [authenticated, setAuthenticated] = useState<boolean>(() => {
+    return !!(data.token && data.user);
+  });
+
+  useEffect(() => {
+    setAuthenticated(!!(data.token && data.user));
+  }, [data]);
 
   const signIn = useCallback(async (credentials: SignInProps): Promise<
     void
@@ -76,7 +90,13 @@ export const AuthProvider: React.FC = ({ children }) => {
 
   return (
     <AuthContext.Provider
-      value={{ signUp, signIn, token: data.token, user: data.user }}
+      value={{
+        signUp,
+        signIn,
+        token: data.token,
+        user: data.user,
+        authenticated,
+      }}
     >
       {children}
     </AuthContext.Provider>

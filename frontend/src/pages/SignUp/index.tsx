@@ -83,7 +83,7 @@ const SignUp: React.FC = () => {
           </Inputs>
 
           <Button>Sign up</Button>
-          <Link to="/">
+          <Link to="/signin">
             <FiArrowLeft />
             <small>return</small>
           </Link>
