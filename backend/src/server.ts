@@ -5,6 +5,7 @@ import 'reflect-metadata';
 import 'express-async-errors';
 import express, { Request, Response, NextFunction } from 'express';
 import http from 'http';
+import cors from 'cors';
 
 import AppError from './errors/AppError';
 
@@ -17,8 +18,7 @@ const httpServer = http.createServer(app);
 socketEvents(httpServer);
 
 app.use(express.json());
-app.use('/css', express.static(`${__dirname}/resources/css`));
-app.use('/js', express.static(`${__dirname}/resources/js`));
+app.use(cors());
 app.use(routes);
 
 app.use(
