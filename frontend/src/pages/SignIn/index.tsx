@@ -3,11 +3,13 @@ import { Link } from 'react-router-dom';
 import { Form } from '@unform/web';
 import { FormHandles } from '@unform/core';
 import * as Yup from 'yup';
+import { toast } from 'react-toastify';
 
 import { Container, Background, Content, Inputs } from './styles';
 import { Button } from '../../styles';
 
 import getValidationErrors from '../../utils/getValidationErrors';
+import showServerError from '../../utils/showServerError';
 
 import Input from '../../components/Input';
 
@@ -38,13 +40,17 @@ const SignIn: React.FC = () => {
         await schema.validate(data, { abortEarly: false });
 
         const { password, username } = data;
-        signIn({ password, username });
+        await signIn({ password, username });
+
+        toast('Logged successfully', { type: toast.TYPE.SUCCESS });
       } catch (error) {
         if (error instanceof Yup.ValidationError) {
           const errors = getValidationErrors(error);
 
           formRef.current?.setErrors(errors);
         }
+
+        showServerError(error);
       }
     },
     [signIn]

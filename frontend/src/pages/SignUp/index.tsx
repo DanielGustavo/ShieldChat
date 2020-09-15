@@ -4,6 +4,7 @@ import { FiArrowLeft } from 'react-icons/fi';
 import { Form } from '@unform/web';
 import { FormHandles } from '@unform/core';
 import * as Yup from 'yup';
+import { toast } from 'react-toastify';
 
 import { Container, Background, Content, Inputs } from './styles';
 import { Button } from '../../styles';
@@ -11,6 +12,7 @@ import { Button } from '../../styles';
 import Input from '../../components/Input';
 
 import getValidationErrors from '../../utils/getValidationErrors';
+import showServerError from '../../utils/showServerError';
 
 import logo from '../../assets/logo.svg';
 
@@ -46,13 +48,17 @@ const SignUp: React.FC = () => {
         await schema.validate(data, { abortEarly: false });
 
         const { username, password, password_confirmation } = data;
-        signUp({ username, password, password_confirmation });
+        await signUp({ username, password, password_confirmation });
+
+        toast('Registered successfully', { type: toast.TYPE.SUCCESS });
       } catch (error) {
         if (error instanceof Yup.ValidationError) {
           const errors = getValidationErrors(error);
 
           formRef.current?.setErrors(errors);
         }
+
+        showServerError(error);
       }
     },
     [signUp]
