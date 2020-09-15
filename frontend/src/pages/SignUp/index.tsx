@@ -14,6 +14,8 @@ import getValidationErrors from '../../utils/getValidationErrors';
 
 import logo from '../../assets/logo.svg';
 
+import { useAuth } from '../../context/AuthContext';
+
 interface SignUpFormData {
   username: string;
   password: string;
@@ -23,31 +25,38 @@ interface SignUpFormData {
 const SignUp: React.FC = () => {
   const formRef = useRef<FormHandles>(null);
 
-  const handleSubmit = useCallback(async (data: SignUpFormData) => {
-    try {
-      formRef.current?.setErrors({});
+  const { signUp } = useAuth();
 
-      const schema = Yup.object().shape({
-        username: Yup.string().min(5).required(),
-        password: Yup.string().min(10).required(),
-        password_confirmation: Yup.string()
-          .required('password confirmation is required')
-          .oneOf(
-            [Yup.ref('password')],
-            'password confirmation must be equal to the password field'
-          ),
-      });
+  const handleSubmit = useCallback(
+    async (data: SignUpFormData) => {
+      try {
+        formRef.current?.setErrors({});
 
-      await schema.validate(data, { abortEarly: false });
-      alert('submited');
-    } catch (error) {
-      if (error instanceof Yup.ValidationError) {
-        const errors = getValidationErrors(error);
+        const schema = Yup.object().shape({
+          username: Yup.string().min(5).required(),
+          password: Yup.string().min(10).required(),
+          password_confirmation: Yup.string()
+            .required('password confirmation is required')
+            .oneOf(
+              [Yup.ref('password')],
+              'password confirmation must be equal to the password field'
+            ),
+        });
 
-        formRef.current?.setErrors(errors);
+        await schema.validate(data, { abortEarly: false });
+
+        const { username, password, password_confirmation } = data;
+        signUp({ username, password, password_confirmation });
+      } catch (error) {
+        if (error instanceof Yup.ValidationError) {
+          const errors = getValidationErrors(error);
+
+          formRef.current?.setErrors(errors);
+        }
       }
-    }
-  }, []);
+    },
+    [signUp]
+  );
 
   return (
     <Container>

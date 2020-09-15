@@ -13,6 +13,8 @@ import Input from '../../components/Input';
 
 import logo from '../../assets/logo.svg';
 
+import { useAuth } from '../../context/AuthContext';
+
 interface SignInFormProps {
   username: string;
   password: string;
@@ -21,25 +23,32 @@ interface SignInFormProps {
 const SignIn: React.FC = () => {
   const formRef = useRef<FormHandles>(null);
 
-  const handleSubmit = useCallback(async (data: SignInFormProps) => {
-    try {
-      formRef.current?.setErrors({});
+  const { signIn } = useAuth();
 
-      const schema = Yup.object().shape({
-        username: Yup.string().required(),
-        password: Yup.string().required(),
-      });
+  const handleSubmit = useCallback(
+    async (data: SignInFormProps) => {
+      try {
+        formRef.current?.setErrors({});
 
-      await schema.validate(data, { abortEarly: false });
-      alert('submited');
-    } catch (error) {
-      if (error instanceof Yup.ValidationError) {
-        const errors = getValidationErrors(error);
+        const schema = Yup.object().shape({
+          username: Yup.string().required(),
+          password: Yup.string().required(),
+        });
 
-        formRef.current?.setErrors(errors);
+        await schema.validate(data, { abortEarly: false });
+
+        const { password, username } = data;
+        signIn({ password, username });
+      } catch (error) {
+        if (error instanceof Yup.ValidationError) {
+          const errors = getValidationErrors(error);
+
+          formRef.current?.setErrors(errors);
+        }
       }
-    }
-  }, []);
+    },
+    [signIn]
+  );
 
   return (
     <Container>
