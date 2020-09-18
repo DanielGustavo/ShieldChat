@@ -33,4 +33,22 @@ export default createGlobalStyle`
   button {
     cursor: pointer;
   }
+
+  ::-webkit-scrollbar {
+    width: 7px;
+  }
+
+  ::-webkit-scrollbar-track {
+    background: var(--color-dark-gray);
+    border-radius: 30px;
+  }
+
+  ::-webkit-scrollbar-thumb {
+    background: var(--color-gray);
+    border-radius: 30px;
+  }
+
+  ::-webkit-scrollbar-thumb:hover {
+    background: var(--color-light-gray);
+  }
 `;

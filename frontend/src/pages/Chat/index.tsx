@@ -1,5 +1,5 @@
 import React, { useEffect, useRef, useState, useCallback } from 'react';
-import { FiSend } from 'react-icons/fi';
+import { FiSend, FiLogOut } from 'react-icons/fi';
 import socketio from 'socket.io-client';
 
 import { useAuth } from '../../context/AuthContext';
@@ -30,7 +30,7 @@ const Chat: React.FC = () => {
   const [messages, setMessages] = useState([] as MessageProps[]);
   const [io, setIo] = useState<SocketIOClient.Socket | null>(null);
 
-  const { user, token } = useAuth();
+  const { user, token, logout } = useAuth();
 
   const messagesWrapperRef = useRef<HTMLDivElement>(null);
   const messageInputRef = useRef<HTMLInputElement>(null);
@@ -143,6 +143,11 @@ const Chat: React.FC = () => {
           return (
             <User owner={isOwner} key={currentUser.username}>
               {currentUser.username}
+              {isOwner && (
+                <button type="button" onClick={logout}>
+                  <FiLogOut size={15} />
+                </button>
+              )}
             </User>
           );
         })}

@@ -20,12 +20,40 @@ export const User = styled.div<UserProps>`
   }};
   padding: 10px;
   border-radius: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  button {
+    background: none;
+    border: 0;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    svg {
+      transition: 0.4s;
+
+      &:hover {
+        transition: 0.4s;
+        cursor: pointer;
+        color: var(--color-black);
+      }
+
+      &:active {
+        transition: 0s;
+        color: var(--color-red);
+      }
+    }
+  }
 `;
 
 export const Sidebar = styled.aside`
   background: var(--color-gray);
   padding: 15px 15px;
   width: 20%;
+  height: 100%;
+  overflow-y: auto;
 
   ${User} + ${User} {
     margin-top: 10px;
@@ -52,6 +80,11 @@ export const Message = styled.div<MessageProps>`
     display: block;
     font-weight: 500;
   }
+
+  p {
+    word-break: break-word;
+    white-space: pre-wrap;
+  }
 `;
 
 export const MessagesWrapper = styled.div`
@@ -64,24 +97,6 @@ export const MessagesWrapper = styled.div`
 
   ${Message} + ${Message} {
     margin-top: 10px;
-  }
-
-  ::-webkit-scrollbar {
-    width: 7px;
-  }
-
-  ::-webkit-scrollbar-track {
-    background: var(--color-dark-gray);
-    border-radius: 30px;
-  }
-
-  ::-webkit-scrollbar-thumb {
-    background: var(--color-gray);
-    border-radius: 30px;
-  }
-
-  ::-webkit-scrollbar-thumb:hover {
-    background: var(--color-light-gray);
   }
 `;
 

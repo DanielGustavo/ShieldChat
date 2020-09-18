@@ -27,6 +27,7 @@ interface User {
 interface AuthProps {
   signIn: (credentials: SignInProps) => Promise<void>;
   signUp: (credentials: SignUpProps) => Promise<void>;
+  logout: () => void;
   token: string;
   user: User;
   authenticated: boolean;
@@ -88,11 +89,18 @@ export const AuthProvider: React.FC = ({ children }) => {
     [signIn]
   );
 
+  const logout = useCallback(() => {
+    window.localStorage.removeItem('ShieldChat:user');
+    window.localStorage.removeItem('ShieldChat:token');
+    window.location.href = '/';
+  }, []);
+
   return (
     <AuthContext.Provider
       value={{
         signUp,
         signIn,
+        logout,
         token: data.token,
         user: data.user,
         authenticated,
