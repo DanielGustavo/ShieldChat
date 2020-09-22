@@ -8,6 +8,8 @@ import React, {
 
 import api from '../services/api';
 
+import checkIfTokenExpired from '../utils/checkIfTokenExpired';
+
 interface SignInProps {
   username: string;
   password: string;
@@ -55,11 +57,17 @@ export const AuthProvider: React.FC = ({ children }) => {
 
     return {} as AuthData;
   });
+
   const [authenticated, setAuthenticated] = useState<boolean>(() => {
     return !!(data.token && data.user);
   });
 
   useEffect(() => {
+    if (checkIfTokenExpired(data.token)) {
+      setAuthenticated(false);
+      return;
+    }
+
     setAuthenticated(!!(data.token && data.user));
   }, [data]);
 

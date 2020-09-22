@@ -2,6 +2,7 @@ import React, { useEffect, useRef, useState, useCallback } from 'react';
 import { FiSend, FiLogOut } from 'react-icons/fi';
 import socketio from 'socket.io-client';
 
+import { toast } from 'react-toastify';
 import { useAuth } from '../../context/AuthContext';
 
 import {
@@ -100,7 +101,11 @@ const Chat: React.FC = () => {
     io.on('add-user', addUser);
     io.on('remove-user', removeUser);
     io.on('add-message', addMessage);
-  }, [token, user, io, setIo, setUsersConnections]);
+    io.on('disconnect', () => {
+      logout();
+      toast('You were disconnected', { type: toast.TYPE.ERROR });
+    });
+  }, [token, user, io, setIo, setUsersConnections, logout]);
 
   useEffect(() => {
     function setScrollTopToBottom() {
