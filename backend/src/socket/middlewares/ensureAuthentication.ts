@@ -16,6 +16,7 @@ export default function ensureAuthentication(
       socket.user = { username };
     } catch {
       socket.disconnect();
+      return;
     }
 
     next();

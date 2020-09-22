@@ -11,6 +11,8 @@ export default (httpServer: Server): socketio.Server => {
   const io = socketio(httpServer);
 
   io.use(ensureAuthentication).on('connection', (socket) => {
+    socket.use((packet, next) => ensureAuthentication(socket, next));
+
     socket.emit('setup', {
       type: 'setup',
       users: chat.getUsers().map((user) => ({
