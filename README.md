@@ -46,7 +46,7 @@
 # Author
 
 <a href="https://github.com/DanielGustavo">
-  <img style="border-radius: 50%; width: 100px" alt="Daniel Gustavo" src="https://avatars0.githubusercontent.com/u/51492635?v=4">
+  <img width=100 alt="Daniel Gustavo" src="https://avatars0.githubusercontent.com/u/51492635?v=4">
 </a>
 
 <p>Made by <a href="https://github.com/DanielGustavo"><b>Daniel Gustavo</b></a></p>
