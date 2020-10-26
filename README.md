@@ -53,7 +53,7 @@
 
 2. In frontend folder, type the command bellow:
     ```bash
-    > yarn start`
+    > yarn start
     ```
 
 # Tecnologies
