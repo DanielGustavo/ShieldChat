@@ -1,4 +1,7 @@
-<h1 align="center">ShieldChat</h1>
+<h1 align="center">
+
+![ShieldChat](./docs/logo.svg)
+</h1>
 
 ![](./docs/shieldChatExample.gif)
 
@@ -9,32 +12,49 @@
 2. Copy what is inside `.env.example` and paste in `.env`;
 3. Fill the empty fields
 
-```
-  APP_PORT=3333
+    ```
+      APP_PORT=3333
 
-  ## auth
+      ## auth
 
-  AUTH_SECRET='randomPassword'
+      AUTH_SECRET='randomPassword'
 
-  ## database
+      ## database
 
-  DB_USER='DatabaseUser'
-  DB_PASSWORD='DatabasePassword'
-  DATABASE='DatabaseName'
-  DB_HOST='localhost'
-  DB_PORT=5432
-  DB_TYPE='postgres'
-```
+      DB_USER='DatabaseUser'
+      DB_PASSWORD='DatabasePassword'
+      DATABASE='DatabaseName'
+      DB_HOST='localhost'
+      DB_PORT=5432
+      DB_TYPE='postgres'
+    ```
 
-4. Type `yarn` at bash to install the required packages
-5. Type `yarn typeorm migration:run` to run all the migrations
+4. Open the terminal at the backend folder and type the command bellow to install the required packages:
+    ```bash
+    > yarn
+    ```
+
+5. Run all the migrations:
+    ```bash
+    > yarn typeorm migration:run
+    ```
 
 ## Frontend setup
-1. type `yarn` at bash to install the required packages
+1. Open the terminal at the frontend folder and type the command bellow to install the required packages:
+    ```bash
+    > yarn
+    ```
 
 ## Start application
-1. In backend folder, type `yarn dev` to start the server
-2. In frontend folder, type `yarn start` 
+1. In backend folder, type the command bellow to start the server:
+    ```bash
+    > yarn dev
+    ```
+
+2. In frontend folder, type the command bellow:
+    ```bash
+    > yarn start`
+    ```
 
 # Tecnologies
 
