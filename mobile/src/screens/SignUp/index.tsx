@@ -6,6 +6,7 @@ import {
   Platform,
 } from 'react-native';
 import { Feather } from '@expo/vector-icons';
+import { useNavigation } from '@react-navigation/native';
 
 import Logo from '../../assets/images/logo.png';
 import Wave from '../../assets/images/wave2.png';
@@ -22,6 +23,8 @@ import {
 } from './styles';
 
 const SignUp: React.FC = () => {
+  const { goBack } = useNavigation();
+
   return (
     <KeyboardAvoidingView
       behavior={Platform.OS === 'ios' ? 'padding' : undefined}
@@ -60,7 +63,7 @@ const SignUp: React.FC = () => {
         </Container>
 
         <ImageBackground source={Wave}>
-          <ReturnButtonContainer>
+          <ReturnButtonContainer onPress={goBack}>
             <ReturnButtonView>
               <Feather name="arrow-left" color="#fff" size={18} />
               <ReturnButtonText>Return</ReturnButtonText>

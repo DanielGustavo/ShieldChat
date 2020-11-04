@@ -3,8 +3,9 @@ import { StatusBar } from 'expo-status-bar';
 import { SafeAreaView } from 'react-native';
 import { AppLoading } from 'expo';
 import { useFonts } from 'expo-font';
+import { NavigationContainer } from '@react-navigation/native';
 
-import SignUp from './screens/SignUp';
+import Routes from './routes';
 
 const App: React.FC = () => {
   const [loadedFonts] = useFonts({
@@ -18,13 +19,13 @@ const App: React.FC = () => {
   }
 
   return (
-    <>
+    <NavigationContainer>
       <StatusBar hidden />
 
       <SafeAreaView style={{ flex: 1, backgroundColor: '#24292E' }}>
-        <SignUp />
+        <Routes />
       </SafeAreaView>
-    </>
+    </NavigationContainer>
   );
 };
 
