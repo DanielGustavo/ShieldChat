@@ -45,10 +45,10 @@ export const Form = styled.View`
 `;
 
 export const ImageBackground = styled.ImageBackground.attrs({
-  resizeMode: 'cover',
+  resizeMode: 'stretch',
 })`
   width: 100%;
-  height: 200px;
+  height: 150px;
   align-items: center;
   justify-content: flex-end;
 `;
