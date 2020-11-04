@@ -4,7 +4,7 @@ import { SafeAreaView } from 'react-native';
 import { AppLoading } from 'expo';
 import { useFonts } from 'expo-font';
 
-import SignIn from './screens/SignIn';
+import SignUp from './screens/SignUp';
 
 const App: React.FC = () => {
   const [loadedFonts] = useFonts({
@@ -22,7 +22,7 @@ const App: React.FC = () => {
       <StatusBar hidden />
 
       <SafeAreaView style={{ flex: 1, backgroundColor: '#24292E' }}>
-        <SignIn />
+        <SignUp />
       </SafeAreaView>
     </>
   );
