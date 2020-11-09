@@ -2,6 +2,8 @@ import styled from 'styled-components/native';
 import { getBottomSpace } from 'react-native-iphone-x-helper';
 
 import ButtonComponent from '../../components/Button';
+import InputComponent from '../../components/Input';
+import FormComponent from '../../components/Form';
 
 export const Container = styled.View`
   flex: 1;
@@ -10,7 +12,14 @@ export const Container = styled.View`
   padding: 20px 40px 0 40px;
 `;
 
-export const Input = styled.TextInput`
+export const TextError = styled.Text`
+  color: #f05050;
+  margin-bottom: 15px;
+  font-size: 15px;
+  font-family: 'Roboto-Regular';
+`;
+
+export const Input = styled(InputComponent)`
   background-color: #fff;
   font-family: 'Roboto-Regular';
   font-size: 18px;
@@ -39,9 +48,10 @@ export const ReturnButtonText = styled.Text`
   margin-left: 5px;
 `;
 
-export const Form = styled.View`
+export const Form = styled(FormComponent)`
   width: 100%;
   margin: 100px 0 20px 0;
+  align-items: center;
 `;
 
 export const ImageBackground = styled.ImageBackground.attrs({
