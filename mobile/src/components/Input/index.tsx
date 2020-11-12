@@ -1,5 +1,10 @@
-import React, { useRef, useEffect } from 'react';
-import { TextInputProps, StyleProp, ViewStyle } from 'react-native';
+import React, { useRef, useEffect, forwardRef } from 'react';
+import {
+  TextInputProps,
+  StyleProp,
+  ViewStyle,
+  TextInput as TextInputType,
+} from 'react-native';
 import { Feather } from '@expo/vector-icons';
 
 import { useForm } from '../Form/Context';
@@ -15,7 +20,10 @@ interface InputRef {
   value?: unknown;
 }
 
-const Input: React.FC<InputProps> = ({ name, style, ...rest }) => {
+const Input: React.ForwardRefRenderFunction<TextInputType, InputProps> = (
+  { name, style, ...rest },
+  ref
+) => {
   const inputRef = useRef({} as InputRef);
   const { addInput, errors } = useForm();
 
@@ -26,6 +34,7 @@ const Input: React.FC<InputProps> = ({ name, style, ...rest }) => {
   return (
     <Container style={style}>
       <TextInput
+        ref={ref}
         onChangeText={(value) => {
           if (inputRef.current) {
             inputRef.current.value = value;
@@ -41,4 +50,4 @@ const Input: React.FC<InputProps> = ({ name, style, ...rest }) => {
   );
 };
 
-export default Input;
+export default forwardRef(Input);

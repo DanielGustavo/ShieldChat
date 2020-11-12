@@ -4,6 +4,7 @@ import {
   ScrollView,
   KeyboardAvoidingView,
   Platform,
+  TextInput,
 } from 'react-native';
 import { Feather } from '@expo/vector-icons';
 import { useNavigation } from '@react-navigation/native';
@@ -40,6 +41,8 @@ interface SignUpFormProps {
 const SignUp: React.FC = () => {
   const [formError, setFormError] = useState<string | null>(null);
 
+  const passwordInputRef = useRef<TextInput>(null);
+  const passwordConfirmationInputRef = useRef<TextInput>(null);
   const formRef = useRef({} as FormRef);
   const { goBack } = useNavigation();
   const { signUp } = useAuth();
@@ -99,16 +102,22 @@ const SignUp: React.FC = () => {
               returnKeyType="next"
               textContentType="nickname"
               name="username"
+              onSubmitEditing={() => passwordInputRef?.current?.focus()}
             />
             <Input
+              ref={passwordInputRef}
               autoCorrect={false}
               autoCapitalize="none"
               placeholder="Password"
               secureTextEntry
               returnKeyType="next"
               name="password"
+              onSubmitEditing={() =>
+                passwordConfirmationInputRef?.current?.focus()
+              }
             />
             <Input
+              ref={passwordConfirmationInputRef}
               autoCorrect={false}
               autoCapitalize="none"
               placeholder="Password confirmation"
