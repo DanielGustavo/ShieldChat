@@ -13,7 +13,7 @@ interface Fields {
 }
 
 export interface FormRef {
-  getFields: () => Fields;
+  getFields: () => unknown;
   setFieldsErrors: (errors: Errors) => void;
 }
 

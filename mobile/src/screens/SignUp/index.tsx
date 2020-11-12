@@ -4,7 +4,6 @@ import {
   ScrollView,
   KeyboardAvoidingView,
   Platform,
-  Alert,
 } from 'react-native';
 import { Feather } from '@expo/vector-icons';
 import { useNavigation } from '@react-navigation/native';
@@ -12,7 +11,10 @@ import * as Yup from 'yup';
 
 import { FormRef } from '../../components/Form';
 
+import { useAuth } from '../../context/AuthContext';
+
 import getValidationErrors from '../../utils/getValidationErrors';
+import showServerError from '../../utils/showServerError';
 
 import Logo from '../../assets/images/logo.png';
 import Wave from '../../assets/images/wave2.png';
@@ -29,18 +31,25 @@ import {
   TextError,
 } from './styles';
 
+interface SignUpFormProps {
+  username: string;
+  password: string;
+  password_confirmation: string;
+}
+
 const SignUp: React.FC = () => {
   const [formError, setFormError] = useState<string | null>(null);
 
   const formRef = useRef({} as FormRef);
   const { goBack } = useNavigation();
+  const { signUp } = useAuth();
 
   async function handleSubmit() {
     try {
       formRef.current?.setFieldsErrors({});
       setFormError(null);
 
-      const fields = formRef.current?.getFields();
+      const fields = formRef.current?.getFields() as SignUpFormProps;
 
       const schema = Yup.object().shape({
         username: Yup.string().min(5).required(),
@@ -55,7 +64,7 @@ const SignUp: React.FC = () => {
 
       await schema.validate(fields, { abortEarly: false });
 
-      Alert.alert('Form Validation', 'the fields are valid');
+      await signUp(fields);
     } catch (error) {
       if (error instanceof Yup.ValidationError) {
         const errors = getValidationErrors(error);
@@ -63,7 +72,10 @@ const SignUp: React.FC = () => {
 
         formRef.current?.setFieldsErrors(errors);
         setFormError(firstErrorMessage);
+        return;
       }
+
+      showServerError({ error, title: 'Authentication error' });
     }
   }
 
