@@ -23,8 +23,8 @@ interface SignUpProps {
 }
 
 interface User {
-  username: string;
-  id: string;
+  username?: string;
+  id?: string;
 }
 
 interface AuthProps {

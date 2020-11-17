@@ -1,7 +1,11 @@
 import React from 'react';
-import { createStackNavigator } from '@react-navigation/stack';
+import {
+  createStackNavigator,
+  CardStyleInterpolators,
+} from '@react-navigation/stack';
 
 import Chat from '../screens/Chat';
+import Sidebar from '../screens/Sidebar';
 
 const Stack = createStackNavigator();
 
@@ -16,6 +20,13 @@ const Routes: React.FC = () => (
     initialRouteName="Chat"
   >
     <Stack.Screen component={Chat} name="Chat" />
+    <Stack.Screen
+      component={Sidebar}
+      name="Sidebar"
+      options={{
+        cardStyleInterpolator: CardStyleInterpolators.forHorizontalIOS,
+      }}
+    />
   </Stack.Navigator>
 );
 
