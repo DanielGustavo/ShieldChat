@@ -1,6 +1,5 @@
 import React from 'react';
-import { StatusBar } from 'expo-status-bar';
-import { SafeAreaView } from 'react-native';
+import { SafeAreaView, StatusBar } from 'react-native';
 import { AppLoading } from 'expo';
 import { useFonts } from 'expo-font';
 import { NavigationContainer } from '@react-navigation/native';
@@ -23,7 +22,7 @@ const App: React.FC = () => {
   return (
     <AppProvider>
       <NavigationContainer>
-        <StatusBar hidden />
+        <StatusBar barStyle="light-content" backgroundColor="#2E343B" />
 
         <SafeAreaView style={{ flex: 1, backgroundColor: '#24292E' }}>
           <Routes />
