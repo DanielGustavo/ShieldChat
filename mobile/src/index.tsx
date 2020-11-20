@@ -7,7 +7,7 @@ import { NavigationContainer } from '@react-navigation/native';
 
 import Routes from './routes';
 
-import { AuthProvider } from './context/AuthContext';
+import { AppProvider } from './context/AppContext';
 
 const App: React.FC = () => {
   const [loadedFonts] = useFonts({
@@ -21,7 +21,7 @@ const App: React.FC = () => {
   }
 
   return (
-    <AuthProvider>
+    <AppProvider>
       <NavigationContainer>
         <StatusBar hidden />
 
@@ -29,7 +29,7 @@ const App: React.FC = () => {
           <Routes />
         </SafeAreaView>
       </NavigationContainer>
-    </AuthProvider>
+    </AppProvider>
   );
 };
 

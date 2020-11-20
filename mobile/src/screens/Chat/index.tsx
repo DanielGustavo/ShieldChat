@@ -1,53 +1,69 @@
-import React, { useState } from 'react';
+import React, { useRef } from 'react';
 import { FlatList, KeyboardAvoidingView, Platform } from 'react-native';
-import { useNavigation } from '@react-navigation/native';
-import GesturesRecognizer from 'react-native-swipe-gestures';
+import Swiper from 'react-native-swiper';
 
 import Message from '../../components/Message';
+import { FormRef } from '../../components/Form';
+import Sidebar from '../../components/Sidebar';
 
-import { MessageProps } from './types';
+import { useChat } from '../../context/ChatContext';
 
 import {
   Container,
-  TextInputContainer,
-  TextInput,
+  Input,
   FeatherIcon,
+  Form,
+  FeatherIconContainer,
 } from './styles';
 
-const Chat: React.FC = () => {
-  const { navigate } = useNavigation();
+interface FormProps {
+  input?: string;
+}
 
-  const [messages, setMessages] = useState([
-    { user: { username: 'Daniel' }, text: 'Hello world' },
-    { user: { username: 'User1' }, text: 'Hello world' },
-    { user: { username: 'User1' }, text: 'Hello world' },
-    { user: { username: 'User1' }, text: 'Hello world' },
-    { user: { username: 'Daniel' }, text: 'Ok' },
-  ] as MessageProps[]);
+const Chat: React.FC = () => {
+  const formRef = useRef({} as FormRef);
+  const chatListRef = useRef({} as FlatList);
+
+  const { messages, sendMessage } = useChat();
+
+  function handleSubmit() {
+    const { input: message } = formRef.current.getFields() as FormProps;
+
+    if (message) {
+      sendMessage(message);
+    }
+  }
+
+  function handleChatListSizeChanging() {
+    chatListRef.current.scrollToEnd({ animated: true });
+  }
 
   return (
-    <GesturesRecognizer
+    <KeyboardAvoidingView
+      behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
       style={{ flex: 1 }}
-      onSwipeLeft={() => navigate('Sidebar')}
     >
-      <KeyboardAvoidingView
-        behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
-        style={{ flex: 1 }}
-      >
+      <Swiper loop={false} showsPagination={false}>
         <Container>
           <FlatList
+            ref={chatListRef}
             data={messages}
             keyExtractor={(message, index) => `${message.text}${index}`}
             renderItem={({ item }) => <Message message={item} />}
+            onContentSizeChange={handleChatListSizeChanging}
           />
 
-          <TextInputContainer>
-            <TextInput multiline placeholder="Send a message..." />
-            <FeatherIcon name="send" size={20} />
-          </TextInputContainer>
+          <Form ref={formRef}>
+            <Input multiline placeholder="Send a message..." name="input" />
+            <FeatherIconContainer onPress={handleSubmit}>
+              <FeatherIcon name="send" size={20} />
+            </FeatherIconContainer>
+          </Form>
         </Container>
-      </KeyboardAvoidingView>
-    </GesturesRecognizer>
+
+        <Sidebar />
+      </Swiper>
+    </KeyboardAvoidingView>
   );
 };
 

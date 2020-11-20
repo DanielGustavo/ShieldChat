@@ -1,27 +1,36 @@
 import styled from 'styled-components/native';
 import { Feather } from '@expo/vector-icons';
 
+import InputComponent from '../../components/Input';
+import FormComponent from '../../components/Form';
+
 export const Container = styled.View`
   flex: 1;
   padding: 15px 20px 20px;
 `;
 
-export const TextInputContainer = styled.View`
-  background-color: #fff;
-  padding: 14px 18px;
-  border-radius: 30px;
-  width: 100%;
-  flex-direction: row;
-  align-items: center;
+export const Input = styled(InputComponent)`
+  max-height: 150px;
+  flex: 1;
 `;
 
-export const TextInput = styled.TextInput`
-  font-family: 'Roboto-Regular';
-  font-size: 18px;
-  flex: 1;
-  max-height: 150px;
+export const Form = styled(FormComponent)`
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
 `;
 
 export const FeatherIcon = styled(Feather)`
   transform: rotate(45deg);
+`;
+
+export const FeatherIconContainer = styled.TouchableOpacity`
+  background-color: #fff;
+  border-radius: 25px;
+  width: 50px;
+  height: 50px;
+  padding-right: 5px;
+  align-items: center;
+  justify-content: center;
+  margin-left: 5px;
 `;
