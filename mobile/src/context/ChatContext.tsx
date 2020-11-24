@@ -63,7 +63,7 @@ export const ChatProvider: React.FC = ({ children }) => {
     if (!authenticated && io) {
       io.disconnect();
       setIo(undefined);
-    } else if (token && !io) {
+    } else if (authenticated && !io) {
       const socketConnection = socketio.connect('ws://10.0.0.114:3333', {
         query: {
           token: `Bearer ${token}`,
