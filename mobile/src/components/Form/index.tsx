@@ -15,6 +15,7 @@ interface Fields {
 export interface FormRef {
   getFields: () => unknown;
   setFieldsErrors: (errors: Errors) => void;
+  setFields: (fields: Fields) => void;
 }
 
 interface FormProps {
@@ -47,8 +48,15 @@ const Form: React.ForwardRefRenderFunction<FormRef, FormProps> = (
 
         return fields;
       },
-      setFieldsErrors: (fieldsErrors: Errors) => {
+      setFieldsErrors: (fieldsErrors) => {
         setErrors(fieldsErrors);
+      },
+      setFields: (fields) => {
+        Object.entries(fields).forEach(([name, value]) => {
+          const input = inputs[name];
+
+          input.current?.setValue(value);
+        });
       },
     }),
     [inputs]

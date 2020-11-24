@@ -9,6 +9,8 @@ import { Feather } from '@expo/vector-icons';
 
 import { useForm } from '../Form/Context';
 
+import isARef from '../../utils/isARef';
+
 import { Container, TextInput } from './styles';
 
 interface InputProps extends TextInputProps {
@@ -18,12 +20,14 @@ interface InputProps extends TextInputProps {
 
 interface InputRef {
   value?: unknown;
+  setValue: (value: unknown) => void;
 }
 
 const Input: React.ForwardRefRenderFunction<TextInputType, InputProps> = (
   { name, style, ...rest },
-  ref
+  fowardedRef
 ) => {
+  const ref = useRef({} as TextInputType);
   const inputRef = useRef({} as InputRef);
   const { addInput, errors } = useForm();
 
@@ -31,10 +35,22 @@ const Input: React.ForwardRefRenderFunction<TextInputType, InputProps> = (
     addInput({ name, ref: inputRef });
   }, [name, inputRef, addInput]);
 
+  useEffect(() => {
+    inputRef.current.setValue = (value: unknown) => {
+      inputRef.current.value = value;
+
+      if (!fowardedRef || !isARef(fowardedRef)) {
+        ref.current?.setNativeProps({ text: value });
+      } else {
+        fowardedRef.current?.setNativeProps({ text: value });
+      }
+    };
+  }, [ref, fowardedRef]);
+
   return (
     <Container style={style}>
       <TextInput
-        ref={ref}
+        ref={fowardedRef || ref}
         onChangeText={(value) => {
           if (inputRef.current) {
             inputRef.current.value = value;

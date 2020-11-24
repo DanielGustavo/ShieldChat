@@ -17,7 +17,7 @@ import {
 } from './styles';
 
 interface FormProps {
-  input?: string;
+  message?: string;
 }
 
 const Chat: React.FC = () => {
@@ -27,10 +27,11 @@ const Chat: React.FC = () => {
   const { messages, sendMessage } = useChat();
 
   function handleSubmit() {
-    const { input: message } = formRef.current.getFields() as FormProps;
+    const { message } = formRef.current.getFields() as FormProps;
 
     if (message) {
       sendMessage(message);
+      formRef.current?.setFields({ message: '' });
     }
   }
 
@@ -43,7 +44,11 @@ const Chat: React.FC = () => {
       behavior={Platform.OS === 'ios' ? 'padding' : undefined}
       style={{ flex: 1 }}
     >
-      <Swiper loop={false} showsPagination={false}>
+      <Swiper
+        keyboardShouldPersistTaps="handled"
+        loop={false}
+        showsPagination={false}
+      >
         <Container>
           <FlatList
             ref={chatListRef}
@@ -54,7 +59,7 @@ const Chat: React.FC = () => {
           />
 
           <Form ref={formRef}>
-            <Input multiline placeholder="Send a message..." name="input" />
+            <Input multiline placeholder="Send a message..." name="message" />
             <FeatherIconContainer onPress={handleSubmit}>
               <FeatherIcon name="send" size={20} />
             </FeatherIconContainer>
