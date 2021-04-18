@@ -64,7 +64,9 @@ export const ChatProvider: React.FC = ({ children }) => {
       io.disconnect();
       setIo(undefined);
     } else if (authenticated && !io) {
-      const socketConnection = socketio.connect('ws://10.0.0.114:3333', {
+      const chatWebSocketUrl = process.env.CHAT_WS as string;
+
+      const socketConnection = socketio.connect(chatWebSocketUrl, {
         query: {
           token: `Bearer ${token}`,
         },
