@@ -31,15 +31,19 @@ Before starting, you're gonna need to have [Docker](https://www.docker.com/get-s
 1. Create a file `.env`
 2. Copy what is inside `.env.example` and paste in `.env`;
 3. If necessary, change the fields **_(Probably you won't have to do this, just if you want to)_**
-4. Open the terminal at the backend folder and type the command bellow to build the backend's and the database's containers:
+4. Open the terminal at the backend folder and type the command bellow to install the required packages:
+   ```bash
+   > yarn
+   ```
+5. Open the terminal at the backend folder and type the command bellow to build the backend's and the database's containers:
    ```bash
    > docker-compose up --build -d
    ```
-5. Run all the migrations:
+6. Run all the migrations:
    ```bash
    > docker exec shieldchat_backend yarn typeorm migration:run
    ```
-6. Watch the backend's logs:
+7. Watch the backend's logs:
    ```bash
    > docker logs -f shieldchat_backend
    ```
