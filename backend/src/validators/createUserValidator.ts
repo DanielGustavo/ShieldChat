@@ -22,7 +22,7 @@ export default async function userStoreValidator(
   try {
     await schema.validate(request.body, { abortEarly: true });
   } catch (error) {
-    throw new AppError(400, error.message);
+    throw new AppError(400, (error as Yup.ValidationError).message);
   }
 
   return next();
